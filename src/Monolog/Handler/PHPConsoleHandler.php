@@ -190,8 +190,11 @@ class PHPConsoleHandler extends AbstractProcessingHandler
         $result = array(
             'message' => $record['message']
         );
-        if ($record['context'])	{
+        if (!empty($record['context'])) {
             $result['context'] = $this->connector->getDumper()->dump(array_filter($record['context']));
+        }
+        if (!empty($record['extra'])) {
+            $result['extra'] = $this->connector->getDumper()->dump(array_filter($record['extra']));
         }
         
         $this->connector->getDebugDispatcher()->dispatchDebug($result, $tags, $this->options['classesPartialsTraceIgnore']);
