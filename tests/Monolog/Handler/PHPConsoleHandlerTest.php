@@ -120,7 +120,7 @@ class PHPConsoleHandlerTest extends TestCase
 
     public function testDebug()
     {
-        $this->debugDispatcher->expects($this->once())->method('dispatchDebug')->with($this->equalTo('test'));
+        $this->debugDispatcher->expects($this->once())->method('dispatchDebug')->with($this->equalTo(['message' => 'test']));
         $this->initLogger()->debug('test');
     }
 
