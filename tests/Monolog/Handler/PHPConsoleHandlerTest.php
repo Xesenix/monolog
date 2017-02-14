@@ -120,7 +120,7 @@ class PHPConsoleHandlerTest extends TestCase
 
     public function testDebug()
     {
-        $this->debugDispatcher->expects($this->once())->method('dispatchDebug')->with($this->equalTo('test'));
+        $this->debugDispatcher->expects($this->once())->method('dispatchDebug')->with($this->equalTo(['message' => 'test']));
         $this->initLogger()->debug('test');
     }
 
@@ -129,7 +129,7 @@ class PHPConsoleHandlerTest extends TestCase
         $message = 'test';
         $tag = 'tag';
         $context = [$tag, 'custom' => mt_rand()];
-        $expectedMessage = $message . ' ' . json_encode(array_slice($context, 1));
+        $expectedMessage = array('message' => $message, 'context' => array_slice($context, 1));
         $this->debugDispatcher->expects($this->once())->method('dispatchDebug')->with(
             $this->equalTo($expectedMessage),
             $this->equalTo($tag)
