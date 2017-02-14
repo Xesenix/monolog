@@ -187,9 +187,7 @@ class PHPConsoleHandler extends AbstractProcessingHandler
     private function handleDebugRecord(array $record)
     {
         $tags = $this->getRecordTags($record);
-        $result = array(
-            'message' => $record['message']
-        );
+        $result = ['message' => $record['message']];
         if (!empty($record['context'])) {
             $result['context'] = $this->connector->getDumper()->dump(array_filter($record['context']));
         }
